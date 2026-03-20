@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tourist-app-service
+  namespace: prod
+  labels:
+    env: prod
+spec:
+  type: ClusterIP
+  selector:
+    app: tourist
+  ports:
+    - targetPort: 80
+      port: 80
+      protocol: TCP
+
