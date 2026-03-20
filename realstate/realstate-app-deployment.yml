@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: realstate-app-deployment
+  namespace: prod
+  labels:
+    env: prod
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: realstate
+
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailabel: 1
+      maxSurge: 1
+  template:
+    metadata:
+      labels:
+        app: realstate
+    spec:
+      containers:
+        - name: my-state
+          image: tawfeeq421/realstate
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          livenessPeobe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            priodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            priodSeconds: 5
