@@ -2,6 +2,7 @@ apiversion: apps/v1
 kind: Deployment
 metadata:
   name: login-app-deployment
+  namespace: prod
   labels:
     env: prod
 spec:
