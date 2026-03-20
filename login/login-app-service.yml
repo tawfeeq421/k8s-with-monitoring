@@ -1,0 +1,17 @@
+apiVersiion: v1
+kind: Service
+metadata:
+  name: login-app-service
+  namespace: prod
+  labels:
+    env: prod
+spec:
+  type: ClusterIP
+  selector:
+    app: login
+  ports:
+    - targetPort: 80
+      port: 80
+      protocol: TCP
+    
+
