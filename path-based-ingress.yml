@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.1o/v1
+kind: Ingress
+metadata:
+  name: my-ingress
+  namespace: prod
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - example.login.com
+      secretName: login-tls
+  rules:
+    - host: example.login.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: login-app-service
+                port:
+                  number: 80
+          - path: /tourist
+            pathType: Prefix
+            backend:
+              service:
+                name: tourist-app-service
+                port:
+                  number: 80
+
+          - path: /realstate
+            pathType: Prefix
+            backend:
+              service:
+                name: realstate-app-service
+                port:
+                  number: 80
+
+
