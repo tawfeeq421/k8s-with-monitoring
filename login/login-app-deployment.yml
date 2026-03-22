@@ -1,4 +1,4 @@
-apiversion: apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: login-app-deployment
@@ -12,7 +12,7 @@ spec:
       app: login
   strategy:
     type: RollingUpdate
-    rolingUpdate:
+    rollingUpdate:
       maxUnavailable: 1
       maxSurge: 1
   template:
@@ -24,7 +24,7 @@ spec:
         - name: mylogin-app
           image: tawfeeq421/login
           ports:
-            - containerPort: 80
+            - containerPort: 8080
           imagePullPolicy: Always
           resources:
             requests:
@@ -36,14 +36,14 @@ spec:
           livenessProbe:
             httpGet:
               path: /
-              port: 80
-            initialDelaySeconds: 10
-            periodsSeconds: 10
+              port: 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
           readinessProbe:
             httpGet:
               path: /
-              port: 80
-            initialDelaySeconds: 5
+              port: 8080
+            initialDelaySeconds: 30
             periodSeconds: 5
 
 

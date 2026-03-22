@@ -13,7 +13,7 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxUnavailabel: 1
+      maxUnavailable: 1
       maxSurge: 1
   template:
     metadata:
@@ -38,13 +38,13 @@ spec:
               path: /
               port: 80
             initialDelaySeconds: 10
-            priodSeconds: 10
+            periodSeconds: 10
 
           readinessProbe:
             httpGet:
               path: /
               port: 80
             initialDelaySeconds: 5
-            priodSeconds: 5
+            periodSeconds: 5
 
 
