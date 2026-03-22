@@ -1,17 +1,20 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: my-ingress
+  name: tourist-realstate-ingress
   namespace: prod
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
+
 spec:
   ingressClassName: nginx
+
   tls:
     - hosts:
-      - example.tourist.com
+        - example.tourist.com
       secretName: login-tls
+
   rules:
     - host: example.tourist.com
       http:
@@ -31,5 +34,3 @@ spec:
                 name: realstate-app-service
                 port:
                   number: 80
-
-
